@@ -3,17 +3,16 @@ package com.example.movieapp.presentation.ui.mainScreen
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.ui.platform.LocalGraphicsContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieapp.core.common.GlobalValues
 import com.example.movieapp.core.common.enums.UIEvent
 import com.example.movieapp.core.utils.Resource
 import com.example.movieapp.data.model.MovieOverViewModel
-import com.example.movieapp.data.model.NowPlayingResponseModel
 import com.example.movieapp.domain.use_case.NowPlayingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -36,12 +35,8 @@ class MainScreenViewModel @Inject constructor(
 
     private var job: Job? = null
 
-    private val _pageCount : MutableState<Int> = mutableStateOf(1)
+    private val _pageCount : MutableState<Int> = mutableIntStateOf(1)
     val pageCount : State<Int> = _pageCount
-
-    fun setPageCount(int: Int){
-        _pageCount.value = int
-    }
 
     fun plusPageCount(){
         _pageCount.value ++

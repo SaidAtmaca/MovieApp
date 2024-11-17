@@ -1,7 +1,6 @@
 package com.example.movieapp.data.repository
 
 import android.util.Log
-import com.example.movieapp.core.common.jsonStringToModelFromApi
 import com.example.movieapp.core.utils.Resource
 import com.example.movieapp.data.local.RoomDatabaseDao
 import com.example.movieapp.data.local.entity.User
@@ -30,6 +29,8 @@ class AppRepositoryImpl(
 
         }catch(e: IOException) {
 
+            e.printStackTrace()
+
         }
 
 
@@ -48,7 +49,7 @@ class AppRepositoryImpl(
             }
         }catch (e:Exception){
 
-
+            e.printStackTrace()
         }
 
 

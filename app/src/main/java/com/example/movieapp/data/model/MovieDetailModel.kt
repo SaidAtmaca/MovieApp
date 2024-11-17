@@ -48,7 +48,7 @@ data class ProductionCompany(
 
 // ProductionCountry model
 data class ProductionCountry(
-    @SerializedName("iso_3166_1") val iso3166_1: String,
+    @SerializedName("iso_3166_1") val iso31661: String,
     val name: String
 ):Serializable
 

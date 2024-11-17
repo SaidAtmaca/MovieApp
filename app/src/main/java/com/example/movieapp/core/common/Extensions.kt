@@ -1,11 +1,6 @@
 package com.example.movieapp.core.common
 
 import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
 import com.example.movieapp.core.WebServiceError
 import com.example.movieapp.core.gsonAdapters.DoubleDeserializer
 import com.example.movieapp.core.gsonAdapters.IntegerDeserializer
@@ -14,27 +9,9 @@ import com.example.movieapp.core.utils.ResponseResult
 import com.example.movieapp.core.warningMessages.ErrorSource
 import com.example.movieapp.core.warningMessages.ErrorTypes
 import com.example.movieapp.core.warningMessages.WarningMessageModel
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonArray
 import com.google.gson.reflect.TypeToken
-
-
-inline fun <reified T> SnapshotStateList<T>.toArrayList() : ArrayList<T>{
-    var tempList = arrayListOf<T>()
-
-    tempList.addAll(this)
-
-    return tempList
-}
-
-
-inline fun <reified T> String.toListByGson(): ArrayList<T> = if (isNotEmpty()) {
-    Gson().fromJson(this, TypeToken.getParameterized(ArrayList::class.java, T::class.java).type)
-} else {
-    arrayListOf()
-}
-
 
 
 inline fun <reified T> String.jsonStringToModelFromApi(isList:Boolean=true): ResponseResult<T> {
@@ -84,7 +61,7 @@ inline fun <reified T> String.jsonStringToModelFromApi(isList:Boolean=true): Res
             }
 
 
-            ResponseResult(emptyList(), true, errorModel.errorMessageStr, errorCode = errorModel.errorCode?.toLong() ?: 0L)
+            ResponseResult(emptyList(), true, errorModel.errorMessageStr, errorCode = errorModel.errorCode.toLong())
         } else {
             ResponseResult(emptyList(), true, "Geçersiz JSON biçimi")
         }
@@ -114,30 +91,4 @@ inline fun <reified T> String.jsonStringToModelFromApi(isList:Boolean=true): Res
     }
 }
 
-
-fun stringToListOfNumbers(input: String): List<Int> {
-    // Eğer giriş string'i boşsa boş bir liste döndür
-    if (input.isBlank()) return emptyList()
-
-    return try {
-        // String'i virgüllere göre böl ve her bir parçayı Int'e dönüştür
-        input.split(",").map { it.toInt() }
-    } catch (e: NumberFormatException) {
-        // Eğer bir parça Int'e dönüştürülemiyorsa boş bir liste döndür
-        emptyList()
-    }
-}
-
-
-
-
-@Composable
-fun <viewModel : LifecycleObserver> viewModel.observeLifecycleEvents(lifecycle: Lifecycle) {
-    DisposableEffect(lifecycle) {
-        lifecycle.addObserver(this@observeLifecycleEvents)
-        onDispose {
-            lifecycle.removeObserver(this@observeLifecycleEvents)
-        }
-    }
-}
 

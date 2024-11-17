@@ -1,10 +1,7 @@
 package com.example.movieapp.presentation.components
 
-import android.os.Build
-import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.airbnb.lottie.compose.LottieAnimation
@@ -24,7 +21,6 @@ fun LoadingDialog(
             decorFitsSystemWindows = true)
     ){
 
-        val context = LocalContext.current
 
 
 

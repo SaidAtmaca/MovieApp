@@ -10,12 +10,11 @@ import java.io.Serializable
 data class User(
     @PrimaryKey
     var UserID: Long = 0,
-    var userName : String="",
-    var sessionKey : String=""
+    var userName: String = "",
+    var sessionKey: String = ""
 
 
-
-    ): Serializable
+) : Serializable
 
 
 
