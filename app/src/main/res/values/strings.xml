@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MovieApp</string>
+    <string name="dataBulunamadi">Data Bulunamadı</string>
+    <string name="anasayfa">Anasayfa</string>
+    <string name="geri">Geri</string>
+    <string name="ileri">İleri</string>
+    <string name="detaySafasi">Detay Sayfası</string>
+    <string name="populerFilmler">Popüler Filmler</string>
+</resources>
