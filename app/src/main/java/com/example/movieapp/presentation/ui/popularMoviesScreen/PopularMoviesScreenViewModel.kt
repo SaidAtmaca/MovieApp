@@ -5,7 +5,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,6 +13,7 @@ import com.example.movieapp.core.common.enums.UIEvent
 import com.example.movieapp.core.utils.Resource
 import com.example.movieapp.data.model.MovieOverViewModel
 import com.example.movieapp.domain.use_case.PopularMoviesUseCase
+import com.example.movieapp.presentation.util.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -37,30 +37,6 @@ class PopularMoviesScreenViewModel  @Inject constructor(
 
     private val _pageCount : MutableState<Int> = mutableIntStateOf(1)
     val pageCount : State<Int> = _pageCount
-
-    fun plusPageCount(){
-        _pageCount.value ++
-    }
-
-    fun lessPageCount(){
-        if (_pageCount.value >=2){
-            _pageCount.value--
-        }
-    }
-
-    private val _backEnabled : MutableState<Boolean> = mutableStateOf(false)
-    val backEnabled : State<Boolean> = _backEnabled
-
-    private val _forwardEnabled : MutableState<Boolean> = mutableStateOf(true)
-    val forwardEnabled : State<Boolean> = _forwardEnabled
-
-    fun setBackEnabled(boolean: Boolean){
-        _backEnabled.value=boolean
-    }
-
-    fun setForwardEnabled(boolean: Boolean){
-        _forwardEnabled.value=boolean
-    }
 
 
     fun getPopularMovies(pageValue:Int){
@@ -100,6 +76,12 @@ class PopularMoviesScreenViewModel  @Inject constructor(
                         }
                     }
                 }.launchIn(this)
+        }
+    }
+
+    fun gotoMainScreen(){
+        viewModelScope.launch {
+            _eventFlow.emit(UIEvent.Navigate(Screen.MainScreen.route))
         }
     }
 

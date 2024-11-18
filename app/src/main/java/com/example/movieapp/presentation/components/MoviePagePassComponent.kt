@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.movieapp.R
 import com.example.movieapp.presentation.ui.theme.CornerRound
+import com.example.movieapp.presentation.ui.theme.discoverButtonColor
 
 @Composable
 fun MoviePagePassComponent(
@@ -56,7 +57,7 @@ fun MoviePagePassComponent(
                     }
                 ),
             shape = RoundedCornerShape(CornerRound.smallCurveRound),
-            colors = CardDefaults.cardColors(containerColor = if (backEnabled.value) Color.White else Color.Gray),
+            colors = CardDefaults.cardColors(containerColor = if (backEnabled.value) discoverButtonColor else Color.Gray),
             border = BorderStroke(0.5.dp,Color.Gray)
         ) {
             Row(
@@ -67,11 +68,13 @@ fun MoviePagePassComponent(
 
                 Icon(imageVector = Icons.AutoMirrored.Default.ArrowBack,
                     contentDescription = "",
-                    modifier = Modifier.size(24.dp).padding(5.dp))
+                    modifier = Modifier.size(24.dp).padding(5.dp),
+                    tint = Color.Black)
 
                 Text(text = stringResource(R.string.geri),
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(2.dp))
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier.padding(2.dp),
+                    color = Color.Black)
             }
         }
 
@@ -88,7 +91,7 @@ fun MoviePagePassComponent(
                     }
                 ),
             shape = RoundedCornerShape(CornerRound.smallCurveRound),
-            colors = CardDefaults.cardColors(containerColor = if (forwardEnabled.value) Color.White else Color.Gray),
+            colors = CardDefaults.cardColors(containerColor = if (forwardEnabled.value) discoverButtonColor else Color.Gray),
             border = BorderStroke(0.5.dp,Color.Gray)
         ) {
             Row(
@@ -97,12 +100,14 @@ fun MoviePagePassComponent(
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(text = stringResource(R.string.ileri),
-                    style = MaterialTheme.typography.bodySmall,
-                    modifier = Modifier.padding(2.dp))
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier.padding(2.dp),
+                    color =Color.Black)
 
                 Icon(imageVector = Icons.AutoMirrored.Default.ArrowForward,
                     contentDescription = "",
-                    modifier = Modifier.size(24.dp).padding(5.dp))
+                    modifier = Modifier.size(24.dp).padding(5.dp),
+                    tint = Color.Black)
 
 
             }

@@ -6,4 +6,7 @@
     <string name="ileri">İleri</string>
     <string name="detaySafasi">Detay Sayfası</string>
     <string name="populerFilmler">Popüler Filmler</string>
+    <string name="topRate">/10</string>
+    <string name="discoverPopularMovie">Discover Popular Movies</string>
+    <string name="popularMovies">Popular Movies</string>
 </resources>

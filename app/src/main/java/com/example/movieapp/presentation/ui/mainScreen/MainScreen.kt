@@ -1,36 +1,50 @@
 package com.example.movieapp.presentation.ui.mainScreen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.DrawerState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.movieapp.R
 import com.example.movieapp.core.common.enums.UIEvent
 import com.example.movieapp.presentation.components.MovieCard
-import com.example.movieapp.presentation.components.MoviePagePassComponent
 import com.example.movieapp.presentation.components.UpComingMoviePager
-import com.example.movieapp.presentation.ui.theme.mainScreenBackGroundColor
+import com.example.movieapp.presentation.ui.theme.generalScreenBackgroundColor
 import com.example.movieapp.presentation.util.Screen
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.seconds
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     navController: NavController,
@@ -58,35 +72,9 @@ fun MainScreen(
 
     }
 
-    LaunchedEffect(key1 = viewModel.pageCount.value) {
-
-        viewModel.setBackEnabled(viewModel.pageCount.value>=2)
-        viewModel.getNowPlayingList(viewModel.pageCount.value)
-        viewModel.getUpComingMoviesList(viewModel.pageCount.value)
-
-
-    }
-
-    LaunchedEffect(viewModel.movieList.size) {
-        viewModel.setForwardEnabled(viewModel.movieList.isNotEmpty())
-    }
-
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-
-
-          /*  AppTopBar(
-                title = stringResource(R.string.anasayfa)
-            ) {
-                scope.launch {
-                    if (drawerState.isOpen){
-                        drawerState.close()
-                    }else{
-                        drawerState.open()
-                    }
-                }
-            }*/
 
                 UpComingMoviePager(viewModel.upcomingMovieList,
                     movieClicked = { clickedMovie->
@@ -98,40 +86,51 @@ fun MainScreen(
 
         },
         bottomBar = {
-            MoviePagePassComponent(
-                forwardClicked = {
-                    viewModel.plusPageCount()
-                },
-                backClicked = {
-                    viewModel.lessPageCount()
-                },
-                forwardEnabled = viewModel.forwardEnabled,
-                backEnabled = viewModel.backEnabled
-            )
         }
     ) {
-        Box(modifier = Modifier.padding(it)){
+        Box(modifier = Modifier.fillMaxSize().padding(it)){
             Column(
-                modifier = Modifier.fillMaxSize().background(mainScreenBackGroundColor),
+                modifier = Modifier.fillMaxSize().background(generalScreenBackgroundColor),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
+                val resfreshState = rememberPullToRefreshState()
+                var isRefreshing by remember {
+                    mutableStateOf(false)
+                }
+
+
                 AnimatedVisibility(visible = viewModel.movieList.isNotEmpty()) {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .weight(1f)){
-                        items(viewModel.movieList) { eachMovie ->
+                    PullToRefreshBox(
+                        isRefreshing = isRefreshing,
+                        state = resfreshState,
+                        onRefresh = {
 
-                           MovieCard(model = eachMovie) { clickedMovie ->
+                            scope.launch {
+                                isRefreshing=true
+                                delay(2.seconds)
+                                isRefreshing=false
+                            }
+                        },
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        LazyColumn(
+                            modifier = Modifier
+                                .fillMaxSize()){
+                            items(viewModel.movieList) { eachMovie ->
 
-                               navController.currentBackStackEntry?.savedStateHandle?.set("movieId",clickedMovie.id)
-                               navController.navigate(Screen.DetailScreen.route)
-                           }
+                                MovieCard(model = eachMovie) { clickedMovie ->
+
+                                    navController.currentBackStackEntry?.savedStateHandle?.set("movieId",clickedMovie.id)
+                                    navController.navigate(Screen.DetailScreen.route)
+                                }
+                            }
+
                         }
 
-                }
+                    }
+
 
 
                 }
@@ -161,6 +160,10 @@ fun NoDataLayout() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
+        Image(painter = painterResource(R.drawable.empty_box),
+            contentDescription = "",
+            modifier = Modifier.size(36.dp))
 
         Text(text = stringResource(R.string.dataBulunamadi))
     }

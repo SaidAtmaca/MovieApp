@@ -149,7 +149,7 @@ fun UpComingMoviePager(list: List<MovieOverViewModel>,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Bottom
                 ) {
-                    Text(text = if (dateYear.isEmpty()) model.originalTitle else "${model.originalTitle} ($dateYear)",
+                    Text(text = if (dateYear.isEmpty()) model.title else "${model.title} ($dateYear)",
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.padding(5.dp),
                         color = Color.White)

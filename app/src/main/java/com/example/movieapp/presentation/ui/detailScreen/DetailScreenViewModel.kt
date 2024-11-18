@@ -11,6 +11,7 @@ import com.example.movieapp.core.common.enums.UIEvent
 import com.example.movieapp.core.utils.Resource
 import com.example.movieapp.data.model.MovieDetailModel
 import com.example.movieapp.domain.use_case.MovieDetailUseCase
+import com.example.movieapp.presentation.util.Screen
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -75,6 +76,17 @@ class DetailScreenViewModel @Inject constructor(
                         }
                     }
                 }.launchIn(this)
+        }
+    }
+
+    fun gotoPopularMovies(){
+        viewModelScope.launch {
+            _eventFlow.emit(UIEvent.Navigate(Screen.PopularMoviesScreen.route))
+        }
+    }
+    fun gotoMainScreen(){
+        viewModelScope.launch {
+            _eventFlow.emit(UIEvent.Navigate(Screen.MainScreen.route))
         }
     }
 

@@ -23,6 +23,7 @@ val onBackgroundColor = Color.Black
 val onSurfaceColor = Color.Black
 val onErrorColor = Color.White
 
-val mainScreenBackGroundColor = Color(0xFFFAFAFA)
+val generalScreenBackgroundColor = Color(0xFFFAFAFA)
 val viewPagerActiveColor = Color(0xFFFAFAFA)
 val viewPagerPassiveColor = Color(0xFFD0D0D0)
+val discoverButtonColor = Color(0xFFFFDC5E)

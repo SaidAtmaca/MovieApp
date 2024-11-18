@@ -61,7 +61,7 @@ fun MovieCard(model:MovieOverViewModel,
                 verticalArrangement = Arrangement.Center
             ) {
 
-                Text( text = if (dateYear.isEmpty())"${model.originalTitle}"  else "${model.originalTitle}(${dateYear})",
+                Text( text = if (dateYear.isEmpty())"${model.title}"  else "${model.title}(${dateYear})",
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.padding(vertical = 5.dp))
 
