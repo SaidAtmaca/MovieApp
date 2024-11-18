@@ -22,3 +22,7 @@ val onTertiaryColor = Color(0xFFEC8012)
 val onBackgroundColor = Color.Black
 val onSurfaceColor = Color.Black
 val onErrorColor = Color.White
+
+val mainScreenBackGroundColor = Color(0xFFFAFAFA)
+val viewPagerActiveColor = Color(0xFFFAFAFA)
+val viewPagerPassiveColor = Color(0xFFD0D0D0)

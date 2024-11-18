@@ -7,6 +7,7 @@ import com.example.movieapp.data.local.entity.User
 import com.example.movieapp.data.model.MovieDetailModel
 import com.example.movieapp.data.model.NowPlayingResponseModel
 import com.example.movieapp.data.model.PopularMoviesResponseModel
+import com.example.movieapp.data.model.UpComingMoviesResponseModel
 import com.example.movieapp.data.remote.APIService
 import com.example.movieapp.domain.repository.AppRepository
 import kotlinx.coroutines.flow.Flow
@@ -62,6 +63,19 @@ class AppRepositoryImpl(
         try {
 
             val response = apiService.getNowPlayingMovies(pageValue)
+            emit(Resource.Success(response))
+
+        }catch (e:Exception){
+            emit(Resource.Error(e.message.toString()))
+        }
+    }
+
+    override fun getupComingMovies(pageValue: Int): Flow<Resource<UpComingMoviesResponseModel>> =flow{
+        emit(Resource.Loading())
+
+        try {
+
+            val response = apiService.getUpComingMovies(pageValue)
             emit(Resource.Success(response))
 
         }catch (e:Exception){

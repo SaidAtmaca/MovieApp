@@ -12,6 +12,7 @@ import com.example.movieapp.domain.repository.AppRepository
 import com.example.movieapp.domain.use_case.MovieDetailUseCase
 import com.example.movieapp.domain.use_case.NowPlayingUseCase
 import com.example.movieapp.domain.use_case.PopularMoviesUseCase
+import com.example.movieapp.domain.use_case.UpComingMoviesUseCase
 import com.example.movieapp.domain.use_case.UserLiveUseCase
 import dagger.Module
 import dagger.Provides
@@ -108,6 +109,12 @@ object AppModule {
     @Singleton
     fun providePopularMoviesUseCase(repository: AppRepository):PopularMoviesUseCase{
         return PopularMoviesUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUpComingMoviesUseCase(repository: AppRepository):UpComingMoviesUseCase{
+        return UpComingMoviesUseCase(repository)
     }
 
     @Provides

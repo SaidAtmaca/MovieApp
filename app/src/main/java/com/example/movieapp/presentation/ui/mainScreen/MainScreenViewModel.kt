@@ -14,6 +14,7 @@ import com.example.movieapp.core.common.enums.UIEvent
 import com.example.movieapp.core.utils.Resource
 import com.example.movieapp.data.model.MovieOverViewModel
 import com.example.movieapp.domain.use_case.NowPlayingUseCase
+import com.example.movieapp.domain.use_case.UpComingMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -25,13 +26,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
-    private val nowPlayingUseCase: NowPlayingUseCase
+    private val nowPlayingUseCase: NowPlayingUseCase,
+    private val upComingMoviesUseCase: UpComingMoviesUseCase
 )  : ViewModel(){
 
     private val _eventFlow = MutableSharedFlow<UIEvent>()
     val eventFlow = _eventFlow.asSharedFlow()
 
     val movieList : SnapshotStateList<MovieOverViewModel> = mutableStateListOf()
+    val upcomingMovieList : SnapshotStateList<MovieOverViewModel> = mutableStateListOf()
 
     private var job: Job? = null
 
@@ -102,8 +105,50 @@ class MainScreenViewModel @Inject constructor(
         }
     }
 
+    fun getUpComingMoviesList(pageValue:Int){
+        job = viewModelScope.launch {
+            upComingMoviesUseCase.getUpComingMovies(pageValue)
+                .onEach {result->
+                    when (result) {
+
+                        is Resource.Success -> {
+                            GlobalValues.showLoading.postValue(false)
+
+                            Log.e("responsee",result.data.toString())
+
+                            result.data?.let {
+
+                                upcomingMovieList.clear()
+                                upcomingMovieList.addAll(it.results)
+
+                            }
+
+
+
+
+
+                        }
+
+                        is Resource.Error -> {
+                            GlobalValues.showLoading.postValue(false)
+                            _eventFlow.emit(
+                                UIEvent.ShowSnackbar(
+                                    result.message ?: "Unknown error"
+                                )
+                            )
+                        }
+
+                        is Resource.Loading -> {
+                            GlobalValues.showLoading.postValue(true)
+                        }
+                    }
+                }.launchIn(this)
+        }
+    }
+
     init {
         getNowPlayingList(_pageCount.value)
+        getUpComingMoviesList(_pageCount.value)
     }
 
 }

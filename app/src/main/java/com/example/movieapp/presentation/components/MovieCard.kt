@@ -1,10 +1,9 @@
 package com.example.movieapp.presentation.components
 
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
@@ -23,6 +22,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.example.movieapp.core.common.Constants
@@ -35,21 +36,21 @@ fun MovieCard(model:MovieOverViewModel,
               onMovieClicked : (MovieOverViewModel)->Unit) {
 
     val url = Constants.IMAGE_BASE_URL+model.backdropPath
+    val dateYear = model.releaseDate.split("-").first()
     Card (
         modifier = Modifier
             .fillMaxWidth()
             .height(intrinsicSize = IntrinsicSize.Max)
-            .padding(5.dp)
+            .padding(horizontal = 5.dp, vertical = 2.dp)
             .clickable {
                 onMovieClicked(model)
             },
         shape = RoundedCornerShape(CornerRound.smallCurveRound),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        border = BorderStroke(0.5.dp,Color.Gray)
+        colors = CardDefaults.cardColors(containerColor = Color.White)
 
     ){
         Row(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().padding(5.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -60,11 +61,14 @@ fun MovieCard(model:MovieOverViewModel,
                 verticalArrangement = Arrangement.Center
             ) {
 
-                Text( text = model.originalTitle,
-                    style = MaterialTheme.typography.bodyMedium)
+                Text( text = if (dateYear.isEmpty())"${model.originalTitle}"  else "${model.originalTitle}(${dateYear})",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(vertical = 5.dp))
 
-                Text(text = model.releaseDate,
-                    style = MaterialTheme.typography.bodySmall)
+                Text(text = model.overview,
+                    maxLines = 4,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.bodyMedium)
             }
         }
 
@@ -73,22 +77,35 @@ fun MovieCard(model:MovieOverViewModel,
 
 @Composable
 fun ImageBox(url: String) {
-    Box(
-        contentAlignment = Alignment.Center
+    val painter = rememberAsyncImagePainter(url)
+
+    Card(
+        modifier = Modifier.padding(5.dp),
+        shape = RoundedCornerShape(CornerRound.smallCurveRound),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+
     ) {
-        val painter = rememberAsyncImagePainter(url)
+        Column(
+            modifier = Modifier.size(120.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
 
-        Image(
-            painter = painter,
-            contentDescription = "Loaded Image",
-            modifier = Modifier.size(50.dp)
-        )
+            Image(
+                painter = painter,
+                contentDescription = "Loaded Image",
+                modifier = Modifier.size(120.dp),
+                contentScale = ContentScale.Crop
+            )
 
 
-        // Yükleniyor göstergesi
-        if (painter.state is coil.compose.AsyncImagePainter.State.Loading) {
-            CircularProgressIndicator(color = Color.Gray)
+            AnimatedVisibility(visible =painter.state is coil.compose.AsyncImagePainter.State.Loading ) {
+                CircularProgressIndicator(color = Color.Gray)
+            }
+
         }
+
     }
+
 
 }

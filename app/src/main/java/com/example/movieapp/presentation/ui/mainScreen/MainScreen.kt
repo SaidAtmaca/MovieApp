@@ -1,6 +1,7 @@
 package com.example.movieapp.presentation.ui.mainScreen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,12 +23,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.movieapp.R
 import com.example.movieapp.core.common.enums.UIEvent
-import com.example.movieapp.presentation.components.AppTopBar
 import com.example.movieapp.presentation.components.MovieCard
 import com.example.movieapp.presentation.components.MoviePagePassComponent
+import com.example.movieapp.presentation.components.UpComingMoviePager
+import com.example.movieapp.presentation.ui.theme.mainScreenBackGroundColor
 import com.example.movieapp.presentation.util.Screen
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 
 @Composable
@@ -61,6 +62,7 @@ fun MainScreen(
 
         viewModel.setBackEnabled(viewModel.pageCount.value>=2)
         viewModel.getNowPlayingList(viewModel.pageCount.value)
+        viewModel.getUpComingMoviesList(viewModel.pageCount.value)
 
 
     }
@@ -73,7 +75,8 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
 
-            AppTopBar(
+
+          /*  AppTopBar(
                 title = stringResource(R.string.anasayfa)
             ) {
                 scope.launch {
@@ -83,7 +86,16 @@ fun MainScreen(
                         drawerState.open()
                     }
                 }
-            }
+            }*/
+
+                UpComingMoviePager(viewModel.upcomingMovieList,
+                    movieClicked = { clickedMovie->
+                        navController.currentBackStackEntry?.savedStateHandle?.set("movieId",clickedMovie.id)
+                        navController.navigate(Screen.DetailScreen.route)
+                    })
+
+
+
         },
         bottomBar = {
             MoviePagePassComponent(
@@ -100,7 +112,7 @@ fun MainScreen(
     ) {
         Box(modifier = Modifier.padding(it)){
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().background(mainScreenBackGroundColor),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
