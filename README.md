@@ -1,4 +1,4 @@
-# Currency App
+# Movie App
 
 This is an app which you can follow now playing or favorite movies. You can see movie's detail like release, date, rating and overview.
 You can download app and install from **[here.](https://github.com/mobillium-android/Said-Atmaca/blob/master/apks/movieapp.apk)**
