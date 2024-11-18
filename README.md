@@ -18,21 +18,21 @@ You can download app and install from **[here.]()**
 <table><tr>
 <td> 
   <p align="center" style="padding: 10px">
-    <img alt="Forwarding" src="" width="400">
+    <img alt="Forwarding" src="https://github.com/user-attachments/assets/4ea9aefe-3830-4b18-8857-82f23bb775b8" width="400">
     <br>
     <em style="color: grey">Main Screen</em>
   </p> 
 </td>
 <td> 
   <p align="center">
-    <img alt="Routing" src="" width="400">
+    <img alt="Routing" src="https://github.com/user-attachments/assets/6b99ff30-7935-4da5-b638-0b7e7ce46192" width="400">
     <br>
     <em style="color: grey">Detail Screen</em>
   </p> 
 </td>
 <td> 
   <p align="center">
-    <img alt="Routing" src="" width="400">
+    <img alt="Routing" src="https://github.com/user-attachments/assets/c78efba1-03a2-4957-99ea-5c4795c5cc01" width="400">
     <br>
     <em style="color: grey">Popular Movies Screen</em>
   </p> 
