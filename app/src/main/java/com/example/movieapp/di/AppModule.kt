@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.example.movieapp.BuildConfig
 import com.example.movieapp.core.common.Constants
+import com.example.movieapp.core.common.Constants.BASE_URL
 import com.example.movieapp.core.common.Constants.TIME_OUT_RETROFIT
 import com.example.movieapp.data.local.AppDatabase
 import com.example.movieapp.data.remote.APIService
@@ -34,7 +35,7 @@ object AppModule {
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
