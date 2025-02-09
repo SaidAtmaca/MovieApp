@@ -1,4 +1,4 @@
-package com.example.movieapp.core.common.enums
+package com.example.common.enums
 
 
 

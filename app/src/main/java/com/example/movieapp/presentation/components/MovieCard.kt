@@ -26,7 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.example.movieapp.core.common.Constants
+import com.example.common.Constants.IMAGE_BASE_URL
 import com.example.movieapp.data.model.MovieOverViewModel
 import com.example.movieapp.presentation.ui.theme.CornerRound
 
@@ -35,7 +35,7 @@ import com.example.movieapp.presentation.ui.theme.CornerRound
 fun MovieCard(model:MovieOverViewModel,
               onMovieClicked : (MovieOverViewModel)->Unit) {
 
-    val url = Constants.IMAGE_BASE_URL+model.backdropPath
+    val url = IMAGE_BASE_URL+model.backdropPath
     val dateYear = model.releaseDate.split("-").first()
     Card (
         modifier = Modifier

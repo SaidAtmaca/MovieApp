@@ -27,8 +27,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import com.example.common.enums.UIEvent
 import com.example.movieapp.R
-import com.example.movieapp.core.common.enums.UIEvent
 import com.example.movieapp.presentation.components.MovieCard
 import com.example.movieapp.presentation.components.PageTopBar
 import com.example.movieapp.presentation.ui.mainScreen.NoDataLayout

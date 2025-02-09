@@ -1,5 +1,6 @@
 package com.example.movieapp.core.utils
 
+import com.example.common.utils.JsonParser
 import com.google.gson.Gson
 import java.lang.reflect.Type
 

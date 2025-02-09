@@ -36,9 +36,9 @@ import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import com.example.common.Constants
+import com.example.common.enums.UIEvent
 import com.example.movieapp.R
-import com.example.movieapp.core.common.Constants
-import com.example.movieapp.core.common.enums.UIEvent
 import com.example.movieapp.presentation.components.BigImageBox
 import com.example.movieapp.presentation.ui.mainScreen.NoDataLayout
 import com.example.movieapp.presentation.ui.theme.CornerRound

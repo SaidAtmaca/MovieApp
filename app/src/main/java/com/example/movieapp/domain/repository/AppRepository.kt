@@ -1,6 +1,6 @@
 package com.example.movieapp.domain.repository
 
-import com.example.movieapp.core.utils.Resource
+import com.example.common.utils.Resource
 import com.example.movieapp.data.local.entity.User
 import com.example.movieapp.data.model.MovieDetailModel
 import com.example.movieapp.data.model.NowPlayingResponseModel

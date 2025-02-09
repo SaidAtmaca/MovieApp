@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import coil.compose.rememberAsyncImagePainter
-import com.example.movieapp.core.common.Constants
+import com.example.common.Constants.IMAGE_BASE_URL
 import com.example.movieapp.data.model.MovieOverViewModel
 import com.example.movieapp.presentation.ui.theme.viewPagerActiveColor
 import com.example.movieapp.presentation.ui.theme.viewPagerPassiveColor
@@ -125,7 +125,7 @@ fun UpComingMoviePager(list: List<MovieOverViewModel>,
             state = pagerState,
             contentPadding = PaddingValues(0.dp)) { page ->
             val model = list.get(page)
-            val url = Constants.IMAGE_BASE_URL+model.backdropPath
+            val url = IMAGE_BASE_URL+model.backdropPath
             val dateYear = model.releaseDate.split("-").first()
 
             Box(modifier = Modifier

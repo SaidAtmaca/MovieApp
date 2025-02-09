@@ -1,74 +1,51 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.plugin.compose")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    id("movie.android.application")
+    id("movie.android.application.compose")
+    id("movie.android.hilt")
+
 }
 
 android {
     namespace = "com.example.movieapp"
-    compileSdk = 34
 
 
 
     defaultConfig {
         applicationId = "com.example.movieapp"
-        minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+        getByName("release"){
+            isMinifyEnabled =false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+
         }
 
-        debug{
-            isMinifyEnabled =false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility =  JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
+
     }
     buildFeatures {
-        compose =true
+        compose= true
+        buildConfig = true
+        viewBinding =true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.5"
-    }
-    buildFeatures {
-        buildConfig = true
+        kotlinCompilerExtensionVersion ="1.4.3"
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    kapt {
-        correctErrorTypes =true
-    }
 }
 
 dependencies {
+
+
+    implementation(project(":core:common"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:network"))
+    implementation(project(":core:data"))
+    implementation(project(":core:model"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

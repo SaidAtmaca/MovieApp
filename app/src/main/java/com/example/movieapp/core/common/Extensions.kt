@@ -5,7 +5,7 @@ import com.example.movieapp.core.WebServiceError
 import com.example.movieapp.core.gsonAdapters.DoubleDeserializer
 import com.example.movieapp.core.gsonAdapters.IntegerDeserializer
 import com.example.movieapp.core.gsonAdapters.LongDeserializer
-import com.example.movieapp.core.utils.ResponseResult
+import com.example.common.utils.ResponseResult
 import com.example.movieapp.core.warningMessages.ErrorSource
 import com.example.movieapp.core.warningMessages.ErrorTypes
 import com.example.movieapp.core.warningMessages.WarningMessageModel

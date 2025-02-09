@@ -1,5 +1,6 @@
 package com.example.movieapp.core.utils
 
+import com.example.common.utils.Resource
 
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {

@@ -6,9 +6,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.enums.UIEvent
 import com.example.movieapp.core.common.GlobalValues
-import com.example.movieapp.core.common.enums.UIEvent
-import com.example.movieapp.core.utils.Resource
+import com.example.common.utils.Resource
 import com.example.movieapp.data.model.MovieDetailModel
 import com.example.movieapp.domain.use_case.MovieDetailUseCase
 import com.example.movieapp.presentation.util.Screen

@@ -1,7 +1,7 @@
 package com.example.movieapp.data.repository
 
 import android.util.Log
-import com.example.movieapp.core.utils.Resource
+import com.example.common.utils.Resource
 import com.example.movieapp.data.local.RoomDatabaseDao
 import com.example.movieapp.data.local.entity.User
 import com.example.movieapp.data.model.MovieDetailModel

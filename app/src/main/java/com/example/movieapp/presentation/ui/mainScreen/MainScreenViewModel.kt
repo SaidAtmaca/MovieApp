@@ -8,9 +8,9 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.enums.UIEvent
 import com.example.movieapp.core.common.GlobalValues
-import com.example.movieapp.core.common.enums.UIEvent
-import com.example.movieapp.core.utils.Resource
+import com.example.common.utils.Resource
 import com.example.movieapp.data.model.MovieOverViewModel
 import com.example.movieapp.domain.use_case.NowPlayingUseCase
 import com.example.movieapp.domain.use_case.UpComingMoviesUseCase

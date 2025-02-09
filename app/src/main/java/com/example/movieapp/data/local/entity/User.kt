@@ -2,7 +2,7 @@ package com.example.movieapp.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.movieapp.core.common.Constants.ROOM_USER_TABLE
+import com.example.common.Constants.ROOM_USER_TABLE
 import java.io.Serializable
 
 @Entity(tableName = ROOM_USER_TABLE)

@@ -1,4 +1,4 @@
-package com.example.movieapp.core.common
+package com.example.common
 
 object Constants {
     const val TIME_OUT_RETROFIT = 30L
