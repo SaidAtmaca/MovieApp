@@ -1,6 +1,5 @@
 plugins {
     id("movie.android.library")
-    id("movie.android.hilt")
     id("movie.android.library.compose")
 }
 

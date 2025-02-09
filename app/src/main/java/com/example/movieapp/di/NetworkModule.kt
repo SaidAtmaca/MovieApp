@@ -3,7 +3,7 @@ package com.example.movieapp.di
 import com.example.common.Constants.API_TOKEN
 import com.example.common.Constants.BASE_URL
 import com.example.common.Constants.TIME_OUT_RETROFIT
-import com.example.movieapp.data.remote.APIService
+import com.example.network.remote.APIService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

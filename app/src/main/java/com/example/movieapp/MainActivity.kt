@@ -12,10 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.movieapp.core.common.GlobalValues
-import com.example.movieapp.presentation.MovieApp
-import com.example.movieapp.presentation.components.LoadingDialog
-import com.example.movieapp.presentation.ui.theme.MovieAppTheme
+import com.example.common.GlobalValues
+import com.example.movieapp.ui.MovieApp
+import com.example.presentation.components.LoadingDialog
+import com.example.presentation.ui.theme.MovieAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

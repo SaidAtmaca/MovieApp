@@ -3,10 +3,9 @@ package com.example.movieapp.di
 import android.app.Application
 import androidx.room.Room
 import com.example.common.Constants.ROOM_DB_NAME
-import com.example.movieapp.data.local.AppDatabase
-import com.example.movieapp.data.remote.APIService
-import com.example.movieapp.data.repository.AppRepositoryImpl
-import com.example.movieapp.domain.repository.AppRepository
+import com.example.data.repository.AppRepositoryImpl
+import com.example.domain.repository.AppRepository
+import com.example.network.remote.APIService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,18 +19,8 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideWordInfoRepository(
-        db: AppDatabase,
         api: APIService
     ): AppRepository {
-        return AppRepositoryImpl(api, db.roomDao)
-    }
-
-
-    @Provides
-    @Singleton
-    fun provideAppDatabase(app: Application): AppDatabase {
-        return Room.databaseBuilder(
-            app, AppDatabase::class.java, ROOM_DB_NAME
-        ).build()
+        return AppRepositoryImpl(api)
     }
 }
